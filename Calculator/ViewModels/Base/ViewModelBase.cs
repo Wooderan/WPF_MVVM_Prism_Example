@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.ViewModels.Base
 {
-    class ViewModelBase:BindableBase
+    public class ViewModelBase:BindableBase
     {
         protected ViewModelBase()
         {
