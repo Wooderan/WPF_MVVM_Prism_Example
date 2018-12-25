@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.ViewModels.Calculators
 {
-    public class BasicCalculatorViewModel:CalculatorViewModelBase
+    public class ScientificCalculator : CalculatorViewModelBase
     {
         #region Fields
 
@@ -19,7 +19,7 @@ namespace Calculator.ViewModels.Calculators
         private bool _justCulculated;
 
 
-        public override string CalculatorType => "Basic";
+        public override string CalculatorType => "Scientific";
         public override ICollection<Calculation> Calculations { get; }
 
         public string ExpressionText
@@ -75,7 +75,7 @@ namespace Calculator.ViewModels.Calculators
         #endregion
         #endregion
 
-        public BasicCalculatorViewModel(ICalculator calculator)
+        public ScientificCalculator(ICalculator calculator)
         {
             _calculator = calculator;
         }

@@ -1,12 +1,13 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                     xmlns:local="clr-namespace:Calculator.Styles.Calculators"
-                    xmlns:viewModels="clr-namespace:Calculator.ViewModels.Calculators">
+                    xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
+                    xmlns:viewModels="clr-namespace:Calculator.ViewModels.Base">
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="../Buttons/Keypad.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate DataType="{x:Type viewModels:BasicCalculatorViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:CalculatorViewModelBase}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

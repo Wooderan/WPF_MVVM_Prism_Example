@@ -1,18 +1,51 @@
-﻿<Window x:Class="Calculator.Views.Shell"
+﻿<mahApps:MetroWindow x:Class="Calculator.Views.Shell"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Calculator.Views"
         xmlns:prism="http://prismlibrary.com/"
+        xmlns:fa ="http://schemas.fontawesome.io/icons/"
+        xmlns:mahApps="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         prism:ViewModelLocator.AutoWireViewModel="True"
         mc:Ignorable="d"
-        Title="{Binding Title}" Height="350" Width="320">
+        Title="{Binding Title}" Height="400" Width="320">
 
     <Window.Resources>
         <ResourceDictionary Source="../Styles/Calculators/BasicCalculator.xaml"/>
     </Window.Resources>
 
-    <ContentControl Content="{Binding SelectedCalculatorViewModel}"/>
+    <mahApps:MetroWindow.Flyouts>
+        <mahApps:FlyoutsControl>
+            <mahApps:Flyout Header="Calculators" Position="Left" Width="250"
+                            Theme="Accent" IsOpen="{Binding IsFlyOpened}">
+                <ListBox ItemsSource="{Binding Calculators}" DisplayMemberPath="CalculatorType"
+                         SelectedItem="{Binding SelectedCalculatorViewModel, Mode=TwoWay}">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="SelectionChanged">
+                            <i:InvokeCommandAction Command="{Binding ToggleFlyoutCommand}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </ListBox>
+            </mahApps:Flyout>
+        </mahApps:FlyoutsControl>
+    </mahApps:MetroWindow.Flyouts>
+
+    <StackPanel>
+        <StackPanel Orientation="Horizontal">
+            <Button Height="35" Width="35"
+                    Background="White" BorderThickness="0"
+                    Command="{Binding ToggleFlyoutCommand}">
+                <Button.Content>
+                    <fa:ImageAwesome Icon="Bars" Margin="5"/>
+                </Button.Content>
+            </Button>
+            <Label Content="{Binding SelectedCalculatorViewModel.CalculatorType}"
+                   FontSize="30" FontWeight="Bold" Margin="15 5"
+                   VerticalAlignment="Bottom"/>
+        </StackPanel>
+        <ContentControl Content="{Binding SelectedCalculatorViewModel}"/>
+    </StackPanel>
     
-</Window>
+</mahApps:MetroWindow>

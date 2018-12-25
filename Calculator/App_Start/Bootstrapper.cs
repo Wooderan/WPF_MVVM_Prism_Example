@@ -20,7 +20,8 @@ namespace Calculator.App_Start
         protected override void ConfigureContainer()
         {
             base.ConfigureContainer();
-            this.Container.RegisterInstances();
+            this.Container.RegisterInstances()
+                          .RegisterSingletones();
         }
     }
 }
