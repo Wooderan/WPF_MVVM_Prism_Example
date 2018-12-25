@@ -13,38 +13,96 @@
         Title="{Binding Title}" Height="400" Width="320">
 
     <Window.Resources>
-        <ResourceDictionary Source="../Styles/Calculators/BasicCalculator.xaml"/>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Styles/Calculators/BasicCalculator.xaml"/>
+                <ResourceDictionary Source="../Styles/Calculators/ScientificCalculator.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Window.Resources>
 
     <mahApps:MetroWindow.Flyouts>
         <mahApps:FlyoutsControl>
             <mahApps:Flyout Header="Calculators" Position="Left" Width="250"
-                            Theme="Accent" IsOpen="{Binding IsFlyOpened}">
+                            Theme="Accent" IsOpen="{Binding IsLeftFlyOpened}">
                 <ListBox ItemsSource="{Binding Calculators}" DisplayMemberPath="CalculatorType"
                          SelectedItem="{Binding SelectedCalculatorViewModel, Mode=TwoWay}">
                     <i:Interaction.Triggers>
                         <i:EventTrigger EventName="SelectionChanged">
-                            <i:InvokeCommandAction Command="{Binding ToggleFlyoutCommand}"/>
+                            <i:InvokeCommandAction Command="{Binding ToggleFlyoutCommand}"
+                                                   CommandParameter="IsLeftFlyOpened"/>
                         </i:EventTrigger>
                     </i:Interaction.Triggers>
+                </ListBox>
+            </mahApps:Flyout>
+            <mahApps:Flyout Header="History" Position="Bottom" Height="250"
+                            Theme="Adapt" IsOpen="{Binding IsBottomFlyOpened}">
+                <ListBox ItemsSource="{Binding SelectedCalculatorViewModel.Calculations}"
+                         Margin="10">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Margin" Value="0 10"/>
+                            <Setter Property="Template">
+                                <Setter.Value>
+                                    <ControlTemplate>
+                                        <Grid>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto"/>
+                                                <RowDefinition Height="Auto"/>
+                                            </Grid.RowDefinitions>
+                                            <Grid.Resources>
+                                                <Style TargetType="{x:Type TextBlock}">
+                                                    <Setter Property="HorizontalAlignment" Value="Right"/>
+                                                    <Setter Property="FontSize" Value="16"/>
+                                                </Style>
+                                            </Grid.Resources>
+                                            <TextBlock>
+                                                <TextBlock.Text>
+                                                    <Binding Path="Expression">
+                                                        <Binding.StringFormat>{0}=</Binding.StringFormat>
+                                                    </Binding>
+                                                </TextBlock.Text>
+                                            </TextBlock>
+                                            <TextBlock Text="{Binding Value}"
+                                                       FontWeight="Bold"
+                                                       Grid.Row="1"/>
+                                        </Grid>
+                                    </ControlTemplate>
+                                </Setter.Value>
+                            </Setter>
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                 </ListBox>
             </mahApps:Flyout>
         </mahApps:FlyoutsControl>
     </mahApps:MetroWindow.Flyouts>
 
     <StackPanel>
-        <StackPanel Orientation="Horizontal">
-            <Button Height="35" Width="35"
-                    Background="White" BorderThickness="0"
-                    Command="{Binding ToggleFlyoutCommand}">
-                <Button.Content>
-                    <fa:ImageAwesome Icon="Bars" Margin="5"/>
-                </Button.Content>
-            </Button>
-            <Label Content="{Binding SelectedCalculatorViewModel.CalculatorType}"
-                   FontSize="30" FontWeight="Bold" Margin="15 5"
-                   VerticalAlignment="Bottom"/>
-        </StackPanel>
+        <DockPanel>
+            <StackPanel Orientation="Horizontal" DockPanel.Dock="Left">
+                <Button Height="35" Width="35"
+                        Background="White" BorderThickness="0"
+                        Command="{Binding ToggleFlyoutCommand}"
+                        CommandParameter="IsLeftFlyOpened">
+                    <Button.Content>
+                        <fa:ImageAwesome Icon="Bars" Margin="5"/>
+                    </Button.Content>
+                </Button>
+                <Label Content="{Binding SelectedCalculatorViewModel.CalculatorType}"
+                       FontSize="30" FontWeight="Bold" Margin="15 5"
+                       VerticalAlignment="Bottom"/>
+            </StackPanel>
+            <Grid DockPanel.Dock="Right" HorizontalAlignment="Right">
+                <Button  Height="35" Width="35"
+                         Background="White" BorderThickness="0"
+                         Command="{Binding ToggleFlyoutCommand}"
+                         CommandParameter="IsBottomFlyOpened">
+                    <Button.Content>
+                        <fa:ImageAwesome Icon="History" Margin="5"/>
+                    </Button.Content>
+                </Button>
+            </Grid>
+        </DockPanel>
         <ContentControl Content="{Binding SelectedCalculatorViewModel}"/>
     </StackPanel>
     

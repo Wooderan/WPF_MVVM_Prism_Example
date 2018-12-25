@@ -106,7 +106,7 @@
     <Compile Include="ViewModels\Base\CalculatorViewModelBase.cs" />
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\Calculators\BasicCalculatorViewModel.cs" />
-    <Compile Include="ViewModels\Calculators\ScientificCalculator.cs" />
+    <Compile Include="ViewModels\Calculators\ScientificCalculatorViewModel.cs" />
     <Compile Include="ViewModels\Interfaces\ICalculatorViewModel.cs" />
     <Compile Include="ViewModels\ShellViewModel.cs" />
     <Compile Include="Views\Shell.xaml.cs">
@@ -147,6 +147,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Styles\Calculators\BasicCalculator.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Styles\Calculators\ScientificCalculator.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

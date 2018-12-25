@@ -7,7 +7,7 @@
         <ResourceDictionary Source="../Buttons/Keypad.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
-    <DataTemplate DataType="{x:Type viewModels:BasicCalculatorViewModel}">
+    <DataTemplate DataType="{x:Type viewModels:ScientificCalculatorViewModel}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

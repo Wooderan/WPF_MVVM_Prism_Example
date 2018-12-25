@@ -13,7 +13,7 @@ namespace Calculator.Core.Constants
             return new string[]
             {
                 "BasicCalculatorViewModel",
-                "ScientificCalculator",
+                "ScientificCalculatorViewModel",
             };
         }
     }

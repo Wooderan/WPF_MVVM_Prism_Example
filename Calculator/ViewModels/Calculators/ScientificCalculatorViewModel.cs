@@ -10,17 +10,13 @@ using System.Threading.Tasks;
 
 namespace Calculator.ViewModels.Calculators
 {
-    public class BasicCalculatorViewModel:CalculatorViewModelBase
+    public class ScientificCalculatorViewModel : CalculatorViewModelBase
     {
-        
-        #region Constructors
 
-        public BasicCalculatorViewModel(ICalculator calculator):base(calculator)
+        public ScientificCalculatorViewModel(ICalculator calculator):base(calculator)
         {
         }
 
-        #endregion
-
-        public override string CalculatorType => "Basic";
+        public override string CalculatorType => "Scientific";
     }
 }

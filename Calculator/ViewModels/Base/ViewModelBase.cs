@@ -14,7 +14,9 @@ namespace Calculator.ViewModels.Base
             this.RegisterCommands();
         }
 
-        protected virtual void RegisterCommands() { }   
+        protected virtual void RegisterCommands() { }
+
+        protected virtual void RegisterCalculations() { }
 
     }
 }

@@ -16,5 +16,10 @@ namespace Calculator.Models
 
         public string Expression { get; }
         public string Value { get; }
+
+        public override string ToString()
+        {
+            return this.Expression+"="+this.Value;
+        }
     }
 }

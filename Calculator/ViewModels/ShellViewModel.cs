@@ -1,7 +1,5 @@
-﻿using Calculator.Core.Calculators;
-using Calculator.Core.Helpers;
+﻿using Calculator.Core.Helpers;
 using Calculator.ViewModels.Base;
-using Calculator.ViewModels.Calculators;
 using Calculator.ViewModels.Interfaces;
 using Prism.Commands;
 using System.Collections.ObjectModel;
@@ -16,7 +14,6 @@ namespace Calculator.ViewModels
             this.SelectedCalculatorViewModel = this.Calculators[0];
         }
 
-        public static string Title { get; } = "Cool Calculator";
 
         #region Fields
 
@@ -24,6 +21,7 @@ namespace Calculator.ViewModels
         private ICalculatorViewModel _selectedCalculatorViewModel;
 
 
+        public static string Title { get; } = "Cool Calculator";
         public ObservableCollection<ICalculatorViewModel> Calculators { get => _calculators; private set => _calculators = value; }
         public ICalculatorViewModel SelectedCalculatorViewModel
         {
@@ -31,26 +29,34 @@ namespace Calculator.ViewModels
             set { SetProperty(ref _selectedCalculatorViewModel, value); }
         }
 
-        private bool _isFlyOpened;
-        public bool IsFlyOpened
+        private bool _isLeftFlyOpened;
+        public bool IsLeftFlyOpened
         {
-            get { return _isFlyOpened; }
-            set { SetProperty(ref _isFlyOpened, value); }
+            get { return _isLeftFlyOpened; }
+            set { SetProperty(ref _isLeftFlyOpened, value); }
+        }
+
+        private bool _isBottomFlyOpened;
+        public bool IsBottomFlyOpened
+        {
+            get { return _isBottomFlyOpened; }
+            set { SetProperty(ref _isBottomFlyOpened, value); }
         }
 
 
         #endregion
 
         #region Commands
-        private DelegateCommand _toggleFlyoutCommand;
-        public DelegateCommand ToggleFlyoutCommand =>
-            _toggleFlyoutCommand ?? (_toggleFlyoutCommand = new DelegateCommand(ExecuteToggleFlyoutCommand));
+        private DelegateCommand<string> _toggleFlyoutCommand;
+        public DelegateCommand<string> ToggleFlyoutCommand =>   
+            _toggleFlyoutCommand ?? (_toggleFlyoutCommand = new DelegateCommand<string>(ExecuteToggleFlyoutCommand));
 
-
-        void ExecuteToggleFlyoutCommand()
+        void ExecuteToggleFlyoutCommand(string property)
         {
-            this.IsFlyOpened = !this.IsFlyOpened;
-        }
+            var prop = this.GetType().GetProperty(property);
+            prop.SetValue(this, !(bool)prop.GetValue(this));
+        }       
+
         #endregion
 
     }
